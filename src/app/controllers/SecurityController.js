@@ -1,6 +1,7 @@
 const error = require('mongoose/lib/error');
 const Account = require('../models/Login.js');
 const { sendSuccess, sendError, sendServerError } = require('../middelware/index.js');
+const jwt = require("jsonwebtoken");
 
 class SecurityController {
 
@@ -91,7 +92,20 @@ class SecurityController {
 
       
     } */
-
+    getAccount(req, res) {
+        const {name, password} = req.body
+        Account.findOne({
+            name: name,
+            password: password
+        }).then(data => {
+            var token = jwt.sign({
+                _id : data._id
+            }, "mk")
+            return sendSuccess(res, "Thanh cong", token)
+        }).catch(error => {
+            return sendServerError()
+        })
+    }
 }
 
 module.exports = new SecurityController();

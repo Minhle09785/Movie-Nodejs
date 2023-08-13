@@ -7,5 +7,5 @@ router.get('/', securityController.index);
 router.post('/register', securityController.create);
 router.get('/login', securityController.getlogin);
 router.post("/login", securityController.show);
-/* router.get('/account',  securityController.getAccount); */
+router.post('/account',  securityController.getAccount);
 module.exports = router;
