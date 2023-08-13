@@ -67,5 +67,4 @@ class CourseController {
             .catch(next);
     }
 }
-
 module.exports = new CourseController();
