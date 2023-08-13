@@ -1,9 +1,9 @@
 const error = require('mongoose/lib/error');
-const { mongooseToObject } = require('../../util/mongoose');
-
 const Account = require('../models/Login.js');
+const { sendSuccess, sendError, sendServerError } = require('../middelware/index.js');
 
 class SecurityController {
+
     // Get đến Trang Tạo tài khoản
     index(req, res) {
         res.render('login/createAccount');
@@ -65,7 +65,33 @@ class SecurityController {
             console.log(error);
         })
     }
+
+    //Get Account
+    /*  async getAccount(req, res) {
+      try {
+        const {name, password, role} = req.query;
+        var query = {};
+        if(name) {
+            query.name = name;
+        }
+        const account = await Account.find({$and: [query]})
+        const length = await Account.find({$and: [query]}).count();
+        if(account){ 
+            return sendSuccess(res, "sendSuccess", {
+                length,
+                account
+            })
+        }else{
+            return sendError(res, "Fail")
+        }
+      } catch (error) {
+        console.log(error);
+        return sendServerError();
+      }
+
+      
+    } */
+
 }
-  
 
 module.exports = new SecurityController();
