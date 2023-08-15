@@ -7,13 +7,11 @@ const handlebars = require('express-handlebars');
 const route = require('./routes');
 const db = require('./config/db');
 
-
 // Connect to DB
 db.connect();
 
 const app = express();
 const port = 3000;
-
 // Use static folder
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -1,27 +1,71 @@
-<title>	Login </title>
-   <div class="panel panel-primary">
-	<form method="post" action='/login/login'>
-				<div class="panel-heading">Đăng nhập</div>
-				<div class="panel-body">
-					<div class="form-group">
-						<div>Tên Đăng Nhập: </div>
-						<input name="name" id='name'  class="form-control">
-					</div>
-					<div class="form-group">
-						<div>Mật Khẩu Đăng Nhập: </div>
-						<input name="password" id='password'  type="password" class="form-control">
-					</div>
-					<div class="form-group">
-						<div class="form-control">
-							<label class="checkbox-inline">
-								<input type="checkbox" name="remember-me"> Remember me ?
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="panel-footer text-right">
-					<i class="pull-left text-danger" ></i>
-					<button type='submit' class="btn btn-success">Đăng Nhập</button>
-				</div>
-				</form>
-			</div>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <div>
+        <div class="panel-heading">Đăng nhập</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div>Tên Đăng Nhập: </div>
+                <input id='name'  type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <div>Mật Khẩu Đăng Nhập: </div>
+                <input  id='password'  type="text" class="form-control">
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <i class="pull-left text-danger" ></i>
+            <button onclick="AccountLogin()">DangNhap</button>
+        </div>
+    </div>
+    <script>
+        function AccountLogin() {
+             $.ajax({
+                url: '/login/account',
+                method: 'POST',
+                data: {
+                    name: $('#name').val(),
+                    password: $('#password').val()
+            }
+                }).then(data=>{
+                    setCookie('token', data.token,1)
+                }).catch(err=>{
+                    console.log(err);
+                });
+        }
+        
+         function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  
+        }
+    </script>
+  {{!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="">
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  
+        }
+
+        function AccountLogin() {
+            $.ajax({
+                url: 'http://localhost:3000/login/account',
+                method: 'POST',
+                data: {
+                    name: $('#name').val(),
+                    password: $('#password').val()
+            }
+                }).then(data=>{
+                    console.log(data)
+                }).catch(err=>{
+                    console.log(err);
+                });
+        }
+    </script> --}}
+</body>
+
