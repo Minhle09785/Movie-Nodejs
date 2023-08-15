@@ -2,19 +2,28 @@ const error = require('mongoose/lib/error');
 const Account = require('../models/Login.js');
 const { sendSuccess, sendError, sendServerError } = require('../middelware/index.js');
 const jwt = require("jsonwebtoken");
-
 class SecurityController {
 
-    // Get đến Trang Tạo tài khoản
+    /*
+        GET : /login
+        Get đến Trang Tạo tài khoản
+    */
     index(req, res) {
         res.render('login/createAccount');
     }
-    //Get đến trang đăng nhập
+     /*
+        GET : /login/account
+        Get đến Trang Tạo tài khoản
+    */
     getlogin(req, res) {
-        res.render('login/logins');
+        res.render("login/logins");
     }
+    
 
-    //Tạo dữ liệu tài khoản mới.
+    /*
+        POST : /login/register
+        Tạo dữ liệu tài khoản mới.
+    */ 
     create(req, res){
         const {name, password, role} = req.body;
    
@@ -48,7 +57,7 @@ class SecurityController {
         console.log(err);
     })
     }
-    show(req, res) {
+    /* show(req, res) {
         const {name, password} = req.body;
 
         Account.findOne({
@@ -65,10 +74,10 @@ class SecurityController {
         }).catch(error => {
             console.log(error);
         })
-    }
+    } */
 
     //Get Account
-    /*  async getAccount(req, res) {
+  /*    async getAccount(req, res) {
       try {
         const {name, password, role} = req.query;
         var query = {};
@@ -91,20 +100,50 @@ class SecurityController {
       }
 
       
-    } */
-    getAccount(req, res) {
+    }
+    */
+    /* 
+        POST : /login/account
+    */
+    postAccount(req, res, next) {
         const {name, password} = req.body
         Account.findOne({
             name: name,
             password: password
         }).then(data => {
+           if(data){
             var token = jwt.sign({
-                _id : data._id
-            }, "mk")
-            return sendSuccess(res, "Thanh cong", token)
+                _id: data._id
+            }, 'mk')
+            res.json({
+                message: 'thanh cong',
+                token: token
+            })
+        }else{
+            return sendError(res, "that bai", );
+           }
         }).catch(error => {
-            return sendServerError()
+            return res.status(400)
         })
+    }
+    /*
+        GÁN MÃ TOKEN LÊN ĐƯỜNG DẪN ĐỂ CHẠY.
+        GET: /login/private
+    */ 
+    private(req, res, next) {
+          {
+           try {
+            const token = req.cookies.token;
+            const ketqua = jwt.verify(token, "mk");
+            if(ketqua) {
+                next()
+            }
+           } catch (error) {
+            return res.redirect("/login/account")
+           }
+        };{
+            return res.redirect("/")
+        }
     }
 }
 
