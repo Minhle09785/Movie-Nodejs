@@ -15,7 +15,7 @@
         </div>
         <div class="panel-footer text-right">
             <i class="pull-left text-danger" ></i>
-            <button onclick="AccountLogin()">DangNhap</button>
+            <button type='submit' onclick="AccountLogin()">DangNhap</button>
         </div>
     </div>
     <script>
@@ -42,30 +42,5 @@
   
         }
     </script>
-  {{!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="">
-        function setCookie(cname, cvalue, exdays) {
-            const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  
-        }
-
-        function AccountLogin() {
-            $.ajax({
-                url: 'http://localhost:3000/login/account',
-                method: 'POST',
-                data: {
-                    name: $('#name').val(),
-                    password: $('#password').val()
-            }
-                }).then(data=>{
-                    console.log(data)
-                }).catch(err=>{
-                    console.log(err);
-                });
-        }
-    </script> --}}
 </body>
 

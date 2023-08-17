@@ -1,6 +1,6 @@
 const error = require('mongoose/lib/error');
-const Account = require('../models/Login.js');
-const { sendSuccess, sendError, sendServerError } = require('../middelware/index.js');
+const Account = require('../models/User.js');
+const { sendSuccess, sendError, sendServerError } = require('../middelware/error.js');
 const jwt = require("jsonwebtoken");
 class SecurityController {
 
@@ -49,7 +49,7 @@ class SecurityController {
                 role: role
             }).then(data => {
             console.log("TẠO TÀI KHOẢN THÀNH CÔNG");
-            res.redirect('/login/login')
+            res.redirect('/login/account')
     })
         }
       }
@@ -145,6 +145,15 @@ class SecurityController {
             return res.redirect("/")
         }
     }
+    
+async getStudent(req, res, next) {
+    return res.json("STUDENT")    
 }
-
+getTeacher(req, res, next) {
+    return res.json("TEACHER")
+}
+getManager(req, res, next) {
+    return res.json("MANAGER");
+}
+}
 module.exports = new SecurityController();
