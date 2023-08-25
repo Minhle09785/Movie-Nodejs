@@ -9,7 +9,7 @@ const { checkLogin, checkTeacher } = require('../app/middelware/verifyUser');
 
 function route(app) {
     app.use(cookieParser());
-    app.use('/api/admin',/* checkLogin,checkTeacher,  */adminRouter);
+    app.use('/api/admin',checkLogin,checkTeacher, adminRouter);
     app.use('/news', newsRouter);
     app.use('/me', meRouter);
     app.use('/courses', coursesRouter);
