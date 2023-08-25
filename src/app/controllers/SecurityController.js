@@ -145,13 +145,24 @@ class SecurityController {
             return res.redirect("/")
         }
     }
-    
+    /* 
+        GET: /login/student
+        PHÂN QUYỀN STUDENT
+    */
 async getStudent(req, res, next) {
     return res.json("STUDENT")    
 }
+/* 
+    GET: /login/student
+    PHÂN QUYỀN TEACHER
+*/
 getTeacher(req, res, next) {
     return res.json("TEACHER")
 }
+/* 
+    GET: /login/student
+    PHÂN QUYỀN MANAGER
+*/
 getManager(req, res, next) {
     return res.json("MANAGER");
 }

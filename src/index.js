@@ -70,7 +70,6 @@ app.post('/loginnn', async (req, res) => {
 
 // Routes init
 route(app);
-
 app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`),
 );

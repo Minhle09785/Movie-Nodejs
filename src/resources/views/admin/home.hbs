@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trang Dành cho ADMIN</h1>
+    <div style='display: flex;'>
+        <input type="text">
+        <button>Search</button>
+    </div>
+    <table border='1'>
+        <thead>
+            <th>name</th>
+            <th>password</th>
+            <th>Role</th>
+        </thead>
+        <tbody>
+            {{#each users}}
+                <tr style='width: 300px;height: 30px;'>
+                    <td>{{this.name}}</td>
+                    <td>{{this.password}}</td>
+                    <td>{{this.role}}</td>
+                </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>
